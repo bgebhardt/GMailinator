@@ -141,8 +141,31 @@ NSBundle *GetGMailinatorBundle(void)
             [self overrideMailKeyDown: newEvent];
             break;
         }
-        case 's': {
+        case 's': { // star message
             CGEventRef cgEvent = CGEventCreateKeyboardEvent(NULL, 0x25, true); // l
+            CGEventSetFlags(cgEvent, kCGEventFlagMaskCommand | kCGEventFlagMaskShift);
+            NSEvent *newEvent = [NSEvent eventWithCGEvent: cgEvent];
+            [self overrideMailKeyDown: newEvent];
+            break;
+        }
+//        case 'o': { // open message - TODO: doesn't work.  Likely need to find the class function selecctor for open message to do it.
+//            CGEventRef cgEvent = CGEventCreateKeyboardEvent(NULL, 0x1f, true); // o
+//            CGEventSetFlags(cgEvent, kCGEventFlagMaskCommand);
+//            NSEvent *newEvent = [NSEvent eventWithCGEvent: cgEvent];
+//            [self overrideMailKeyDown: newEvent];
+//            break;
+//        }
+//        case 'z': { // undo - TODO: doesn't work.  Likely need to find the class function selecctor for undo to do it.
+//            CGEventRef cgEvent = CGEventCreateKeyboardEvent(NULL, 0x6, true); // z
+//            CGEventSetFlags(cgEvent, kCGEventFlagMaskCommand);
+//            NSEvent *newEvent = [NSEvent eventWithCGEvent: cgEvent];
+//            [self overrideMailKeyDown: newEvent];
+//            break;
+//        }
+        case 'm':
+        case 'U':
+        case 'I': { // mark as read/unread
+            CGEventRef cgEvent = CGEventCreateKeyboardEvent(NULL, 0x20, true); // u
             CGEventSetFlags(cgEvent, kCGEventFlagMaskCommand | kCGEventFlagMaskShift);
             NSEvent *newEvent = [NSEvent eventWithCGEvent: cgEvent];
             [self overrideMailKeyDown: newEvent];
@@ -210,12 +233,87 @@ NSBundle *GetGMailinatorBundle(void)
             [self overrideMessagesKeyDown: newEvent];
             break;
         }
+        case 'm':
+        case 'U':
+        case 'I': { // mark as read/unread
+            CGEventRef cgEvent = CGEventCreateKeyboardEvent(NULL, 0x20, true); // u
+            CGEventSetFlags(cgEvent, kCGEventFlagMaskCommand | kCGEventFlagMaskShift);
+            NSEvent *newEvent = [NSEvent eventWithCGEvent: cgEvent];
+            [self overrideMailKeyDown: newEvent];
+            break;
+        }
         default:
             [self overrideMessagesKeyDown:event];
             break;
 
     }
 }
+
+// Gmail shortcuts reference
+// https://support.google.com/mail/answer/6594?hl=en
+// Other shortcuts to add
+//Shift + i	Mark as read	Marks your message as 'read' and skip to a newer message.
+//Shift + u	Mark as unread	Marks your message as 'unread' so you can go back to it later.
+//z	Undo	Undoes your previous action, if possible (works for actions with an 'undo' link).
+// I like 'm' for marking read and unread.
+
+// TODO: Figure out how to refactor out these things.  I need to learn objective-c first. :)
+// the common key downs for Messages and Mail Key Down
+// Gmail shortcut keys: #, c, r, f, a, /, s, m, o
+//- (void)overrideCommonKeyDowns: (NSEvent*)event {
+//    unichar key = [[event characters] characterAtIndex:0];
+//    
+//    switch (key) {
+//
+//        case '#': {
+//            [self performSelector:@selector(deleteMessages:) withObject:nil];
+//            break;
+//        }
+//        case 'c': {
+//            [self performSelector:@selector(showComposeWindow:) withObject:nil];
+//            break;
+//        }
+//        case 'r': {
+//            [self performSelector:@selector(replyMessage:) withObject:nil];
+//            break;
+//        }
+//        case 'f': {
+//            [self performSelector:@selector(forwardMessage:) withObject:nil];
+//            break;
+//        }
+//        case 'a': {
+//            [self performSelector:@selector(replyAllMessage:) withObject:nil];
+//            break;
+//        }
+//        case '/': {
+//            CGEventRef cgEvent = CGEventCreateKeyboardEvent(NULL, 3, true);
+//            CGEventSetFlags(cgEvent, kCGEventFlagMaskCommand | kCGEventFlagMaskAlternate);
+//            NSEvent *newEvent = [NSEvent eventWithCGEvent: cgEvent];
+//            [self overrideMessagesKeyDown: newEvent];
+//            break;
+//        }
+//        case 's': {
+//            CGEventRef cgEvent = CGEventCreateKeyboardEvent(NULL, 0x25, true); // l
+//            CGEventSetFlags(cgEvent, kCGEventFlagMaskCommand | kCGEventFlagMaskShift);
+//            NSEvent *newEvent = [NSEvent eventWithCGEvent: cgEvent];
+//            [self overrideMessagesKeyDown: newEvent];
+//            break;
+//        }
+//        case 'm': { // mark as read
+//            CGEventRef cgEvent = CGEventCreateKeyboardEvent(NULL, 0x20, true); // u
+//            CGEventSetFlags(cgEvent, kCGEventFlagMaskCommand | kCGEventFlagMaskShift);
+//            NSEvent *newEvent = [NSEvent eventWithCGEvent: cgEvent];
+//            [self overrideMailKeyDown: newEvent];
+//            break;
+//        }
+//        default:
+//            [self overrideCommonKeyDowns:event];
+//            break;
+//            
+//    }
+//}
+
+
 
 - (void)overrideMessageEditorKeyDown:(NSEvent*)event {
     unichar key = [[event characters] characterAtIndex:0];
