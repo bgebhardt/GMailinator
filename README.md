@@ -18,6 +18,7 @@ in progress.  Tested with Mail for OS X 10.8.4.
   <tr><td>l</td><td>Move to folder (opens dialog)</td></tr>
   <tr><td>s</td><td>Flag</td></tr>
   <tr><td>tab, then enter</td><td>Send message</td></tr>
+  <tr><td>m, U, I</td><td>Mark message read/unread</td></tr>
 </table>
 
 ## How to install
