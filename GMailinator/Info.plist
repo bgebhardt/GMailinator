@@ -7,7 +7,7 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.nompute.gmailinator.${PRODUCT_NAME:rfc1034identifier}</string>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -20,10 +20,10 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
-	<key>NSPrincipalClass</key>
-	<string>GMailinator</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2013 Michael Lai. All rights reserved.</string>
+	<key>NSPrincipalClass</key>
+	<string>GMailinator</string>
 	<key>SupportedPluginCompatibilityUUIDs</key>
 	<array>
 		<string>B61772F2-9975-4EC0-B22F-9A277C46ADD2</string>
