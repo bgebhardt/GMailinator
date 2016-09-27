@@ -1,3 +1,15 @@
+# About this fork...
+
+This is my fork of the bundle with my additions.
+
+## TODO
+
+1. Finish install.sh and install.applescript.  The idea is these scripts will set up everything needed to enable this plugin on a vanilla install of macOS.
+1. Look at this pull request to automatically update the UUID.
+	* [Automatically modify Supported OS UUID by manlycode · Pull Request #44 · nompute/GMailinator]( https://github.com/nompute/GMailinator/pull/44/files?diff=split )
+
+---
+
 # GMailinator
 
 Adds Gmail-esque keyboard shorcuts to Mail.app.  This is still very much a work
